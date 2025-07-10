@@ -1,0 +1,20 @@
+.base {
+  padding: 40px 0;
+}
+
+.contanier {
+  display: flex;
+  flex-direction: column;
+  max-width: 1170px;
+  padding: 0 55px;
+}
+
+.title {
+  margin-bottom: 40px;
+}
+
+.title p {
+  color: rgb(58, 73, 128);
+  font-weight: 700;
+  font-size: 34px;
+}
