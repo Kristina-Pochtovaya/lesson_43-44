@@ -5,7 +5,7 @@
 .contanier {
   display: flex;
   flex-direction: column;
-  max-width: 1170px;
+  max-width: 1570px;
   padding: 0 55px;
 }
 
@@ -17,4 +17,15 @@
   color: rgb(58, 73, 128);
   font-weight: 700;
   font-size: 34px;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+
+  > * {
+    margin: 0 15px;
+  }
 }

@@ -5,17 +5,115 @@
 .contanier {
   display: flex;
   flex-direction: column;
+  width: 305px;
 }
 
-// .logo p {
-//   color: rgb(13, 51, 86);
-//   font-weight: 800;
-//   font-style: Italic;
-//   font-size: 33px;
-// }
+.image {
+  width: 305px;
+  height: 303px;
+  margin-bottom: 22px;
+}
 
-// .content {
-//   color: rgb(0, 0, 0);
-//   font-weight: 600;
-//   font-size: 87px;
-// }
+.image img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(223, 214, 216);
+}
+
+.mainInformation {
+  display: flex;
+  justify-content: space-between;
+
+  margin: 0 -5px;
+
+  > * {
+    margin: 0 5px;
+  }
+}
+
+title {
+  margin-bottom: 5px;
+}
+
+.title p {
+  color: rgb(102, 112, 133);
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.shippingInformation {
+  margin-bottom: 12px;
+}
+
+.shippingInformation p {
+  color: rgb(152, 162, 179);
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.rating {
+  display: flex;
+}
+
+.ratingIcon {
+  width: 17px;
+  height: 17px;
+  margin-right: 2px;
+  margin-bottom: 20px;
+}
+
+.ratingIcon img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.rating p {
+  color: rgb(152, 162, 179);
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.price p {
+  color: rgb(52, 64, 84);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 21px;
+  margin: 0 -5px;
+
+  > * {
+    margin: 0 5px;
+  }
+}
+
+.addButton,
+.showButton {
+  width: 128px;
+  height: 36px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 18px;
+}
+
+.addButton {
+  background-color: rgb(58, 73, 128);
+  border: 1px solid rgb(58, 73, 128);
+  box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+  color: rgb(255, 255, 255);
+}
+
+.showButton {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(208, 213, 221);
+  box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+  color: rgb(58, 73, 128);
+}

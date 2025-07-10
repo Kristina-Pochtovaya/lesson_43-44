@@ -38,8 +38,17 @@ export function Card({
             </div>
           </div>
           <div className={styles.price}>
-            <p>{price}</p>
+            <p>₹ {parseFloat(price.toFixed(2))}</p>
           </div>
+        </div>
+
+        <div className={styles.buttons}>
+          <button type="button" className={styles.addButton}>
+            Add To Cart
+          </button>
+          <button type="button" className={styles.showButton}>
+            Show more
+          </button>
         </div>
       </div>
     </div>
