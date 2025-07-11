@@ -1,0 +1,43 @@
+.base {
+  padding: 0 0 36px 0;
+}
+
+.contanier {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.ratingValue {
+  color: rgb(20, 20, 20);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.comment p {
+  color: rgb(20, 20, 20);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.date {
+  margin-bottom: 27px;
+}
+
+.date p {
+  color: rgb(129, 139, 156);
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.name p {
+  color: rgb(11, 15, 14);
+  font-weight: 500;
+  font-size: 14px;
+}

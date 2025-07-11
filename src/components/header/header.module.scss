@@ -7,7 +7,6 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  max-width: 1570px;
   padding: 0 55px;
   background-color: transparent;
   justify-content: space-between;
@@ -18,7 +17,7 @@
   }
 }
 
-.logo p {
+.logo {
   color: rgb(13, 51, 86);
   font-weight: 800;
   font-style: Italic;

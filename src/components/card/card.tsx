@@ -1,7 +1,10 @@
 import styles from './card.module.scss';
-import ratingicon from '../../assets/photos/rating.png';
+import { NavLink } from 'react-router';
+import { Button } from '../button/button';
+import { Rating } from '../rating/rating';
 
 export type CardProps = {
+  id: number;
   image: string;
   title: string;
   shippingInformation: string;
@@ -10,6 +13,7 @@ export type CardProps = {
 };
 
 export function Card({
+  id,
   image,
   title,
   shippingInformation,
@@ -31,9 +35,7 @@ export function Card({
               <p>{shippingInformation}</p>
             </div>
             <div className={styles.rating}>
-              <div className={styles.ratingIcon}>
-                <img src={ratingicon} alt="image" />
-              </div>
+              <Rating className={styles.ratingIcon} />
               <p>{rating}</p>
             </div>
           </div>
@@ -41,14 +43,11 @@ export function Card({
             <p>₹ {parseFloat(price.toFixed(2))}</p>
           </div>
         </div>
-
         <div className={styles.buttons}>
-          <button type="button" className={styles.addButton}>
-            Add To Cart
-          </button>
-          <button type="button" className={styles.showButton}>
+          <Button title="Add to Cart" className={styles.addButton} />
+          <NavLink to={`/product/${id}`} className={styles.showButton}>
             Show more
-          </button>
+          </NavLink>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Card } from '../card/card';
+import { Card } from '../../components/card/card';
 import styles from './main.module.scss';
 import { useState, useEffect } from 'react';
 
@@ -10,7 +10,7 @@ export function Main() {
       .then((res) => res.json())
       .then((data) => setCards(data.products));
   }, []);
-  console.log(cards, 's');
+
   return (
     <div className={styles.base}>
       <div className={styles.contanier}>
@@ -21,6 +21,7 @@ export function Main() {
           {cards.map((card) => (
             <li key={card.id}>
               <Card
+                id={card.id}
                 image={card.images[0]}
                 title={card.title}
                 shippingInformation={card.shippingInformation}
