@@ -5,7 +5,7 @@ export type ReviewProps = {
   rating: number;
   comment: string;
   name: string;
-  date: Date;
+  date: string;
 };
 
 export function Review({ rating, comment, name, date }: ReviewProps) {

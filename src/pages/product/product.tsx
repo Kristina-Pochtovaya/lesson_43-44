@@ -4,15 +4,16 @@ import { useState, useEffect } from 'react';
 import { Button } from '../../components/button/button';
 import { Review } from '../../components/review/review';
 import { Rating } from '../../components/rating/rating';
+import { ProductType } from '../../types/product';
 
 export function Product() {
-  const [product, setProduct] = useState();
+  const [product, setProduct] = useState<ProductType | null>();
   const { id } = useParams();
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${id}`)
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: ProductType) => {
         setProduct(data);
       });
   }, [id]);

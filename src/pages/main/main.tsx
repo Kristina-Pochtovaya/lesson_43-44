@@ -1,14 +1,15 @@
 import { Card } from '../../components/card/card';
+import { Products, ProductType } from '../../types/product';
 import styles from './main.module.scss';
 import { useState, useEffect } from 'react';
 
 export function Main() {
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState<ProductType[] | []>([]);
 
   useEffect(() => {
     fetch('https://dummyjson.com/products?limit=5')
       .then((res) => res.json())
-      .then((data) => setCards(data.products));
+      .then((data: Products) => setCards(data.products));
   }, []);
 
   return (
