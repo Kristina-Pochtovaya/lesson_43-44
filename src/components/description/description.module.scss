@@ -1,0 +1,40 @@
+.base {
+  width: 60%;
+  background: url('../../assets/description_bg.jpg') center center / cover
+    no-repeat;
+  padding: 100px 136px 35px 66px;
+}
+
+.title {
+  margin-bottom: 273px;
+}
+
+.description {
+  margin-bottom: 312px;
+}
+
+.title p {
+  font-weight: 700;
+  font-size: 40px;
+  letter-spacing: 2%;
+}
+
+.description p {
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: 0;
+}
+
+.footer p {
+  max-width: 216px;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 2%;
+}
+
+.title p,
+.description p,
+.footer p {
+  line-height: 1;
+  color: rgb(255, 255, 255);
+}

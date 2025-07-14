@@ -1,0 +1,19 @@
+.base {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+
+  &__dark {
+    background-color: rgb(0, 0, 0);
+    border: 1px solid rgb(255, 255, 255);
+  }
+
+  &__light {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(0, 0, 0);
+  }
+}

@@ -1,0 +1,21 @@
+.base {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  position: relative;
+
+  &__dark {
+    background-color: rgb(0, 0, 0);
+  }
+
+  &__light {
+    background-color: rgb(255, 255, 255);
+  }
+}
+
+.changeThemeButton {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}

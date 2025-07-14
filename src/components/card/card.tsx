@@ -1,7 +1,8 @@
 import styles from './card.module.scss';
 import { NavLink } from 'react-router';
-import { Button } from '../button/button';
+
 import { Rating } from '../rating/rating';
+import { Button } from '../button/button';
 
 export type CardProps = {
   id: number;

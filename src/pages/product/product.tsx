@@ -1,20 +1,24 @@
 import { useParams } from 'react-router';
 import styles from './product.module.scss';
-import { useState, useEffect } from 'react';
-import { Button } from '../../components/button/button';
+import { useEffect } from 'react';
+
 import { Review } from '../../components/review/review';
 import { Rating } from '../../components/rating/rating';
 import { ProductType } from '../../types/product';
+import { Button } from '../../components/button/button';
+import { selectProduct, setProduct } from '../../store/slices/productSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export function Product() {
-  const [product, setProduct] = useState<ProductType | null>();
+  const dispatch = useDispatch();
+  const product = useSelector(selectProduct);
   const { id } = useParams();
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${id}`)
       .then((res) => res.json())
       .then((data: ProductType) => {
-        setProduct(data);
+        dispatch(setProduct(data));
       });
   }, [id]);
 
