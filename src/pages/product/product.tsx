@@ -1,6 +1,6 @@
 import { useParams } from 'react-router';
 import styles from './product.module.scss';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Review } from '../../components/review/review';
 import { Rating } from '../../components/rating/rating';
@@ -8,8 +8,11 @@ import { ProductType } from '../../types/product';
 import { Button } from '../../components/button/button';
 import { selectProduct, setProduct } from '../../store/slices/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { PopUp } from '../../components/pop_up/button/pop_up';
+import { ProductPopUp } from '../../components/product_pop_up/product_pop_up';
 
 export function Product() {
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
   const dispatch = useDispatch();
   const product = useSelector(selectProduct);
   const { id } = useParams();
@@ -28,7 +31,10 @@ export function Product() {
         <div className={styles.base}>
           <div className={styles.contanier}>
             <div className={styles.product}>
-              <div className={styles.image}>
+              <div
+                className={styles.image}
+                onClick={() => setIsPopupVisible(true)}
+              >
                 <img src={product?.images[0]} alt="image" />
               </div>
 
@@ -74,6 +80,11 @@ export function Product() {
               ))}
             </ul>
           </div>
+          <ProductPopUp
+            image={product?.images[0]}
+            isVisible={isPopupVisible}
+            setIsPopupVisible={setIsPopupVisible}
+          />
         </div>
       ) : null}
     </>

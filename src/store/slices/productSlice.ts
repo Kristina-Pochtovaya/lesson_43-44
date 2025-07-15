@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { ProductType } from '../../types/product';
+import { RootState } from '../store';
 
 const initialState: ProductType | null = null;
 
@@ -19,6 +20,6 @@ export const productSlice = createSlice({
 
 export const { setProduct } = productSlice.actions;
 
-export const selectProduct = (state) => state.product;
+export const selectProduct = (state: RootState) => state.product;
 
 export default productSlice.reducer;
