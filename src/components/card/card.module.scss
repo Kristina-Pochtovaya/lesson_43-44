@@ -25,7 +25,7 @@
 .mainInformation {
   display: flex;
   justify-content: space-between;
-
+  padding: 0 5px;
   margin: 0 -5px;
 
   > * {
@@ -91,6 +91,10 @@ title {
 
   > * {
     margin: 0 5px;
+  }
+
+  &__hidden {
+    display: none;
   }
 }
 

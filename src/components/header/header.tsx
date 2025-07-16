@@ -1,8 +1,12 @@
 import styles from './header.module.scss';
 import photo from '../../assets/photos/photo_1.png';
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
+import { Button } from '../button/button';
+import cart from '../../assets/cart.png';
 
 export function Header() {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.base}>
       <div className={styles.contanier}>
@@ -10,6 +14,15 @@ export function Header() {
           BeautyHub
         </NavLink>
         <div className={styles.content}>
+          <Button
+            className={styles.button}
+            onClick={() => navigate('/cart')}
+            title={
+              <div className={styles.cart}>
+                <img src={cart} alt="cart" />
+              </div>
+            }
+          ></Button>
           <div className={styles.photo}>
             <img src={photo} alt="photo" />
           </div>

@@ -12,7 +12,7 @@ export function Button({ title, onClick, className }: ButtonProps) {
   return (
     <button
       type="button"
-      className={clsx(className, styles.base)}
+      className={clsx(styles.base, className)}
       onClick={onClick}
     >
       {title}

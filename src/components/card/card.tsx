@@ -3,29 +3,31 @@ import { NavLink } from 'react-router';
 
 import { Rating } from '../rating/rating';
 import { Button } from '../button/button';
+import { useDispatch } from 'react-redux';
+import { ProductType } from '../../types/product';
+import { addToCart } from '../../store/slices/cartSlice';
+import clsx from 'clsx';
 
 export type CardProps = {
-  id: number;
-  image: string;
-  title: string;
-  shippingInformation: string;
-  rating: number | string;
-  price: number;
+  product: ProductType;
+  isActionVisible?: boolean;
+  classNames?: {
+    card?: string;
+  };
 };
 
 export function Card({
-  id,
-  image,
-  title,
-  shippingInformation,
-  rating,
-  price,
+  product,
+  classNames,
+  isActionVisible = true,
 }: CardProps) {
+  const { id, images, title, shippingInformation, rating, price } = product;
+  const dispatch = useDispatch();
   return (
-    <div className={styles.base}>
+    <div className={clsx(styles.base, classNames?.card)}>
       <div className={styles.contanier}>
         <div className={styles.image}>
-          <img src={image} alt="image" />
+          <img src={images[0]} alt="image" />
         </div>
         <div className={styles.mainInformation}>
           <div className={styles.description}>
@@ -44,8 +46,18 @@ export function Card({
             <p>₹ {parseFloat(price.toFixed(2))}</p>
           </div>
         </div>
-        <div className={styles.buttons}>
-          <Button title="Add to Cart" className={styles.addButton} />
+
+        <div
+          className={clsx(
+            styles.buttons,
+            !isActionVisible && styles.buttons__hidden
+          )}
+        >
+          <Button
+            title="Add to Cart"
+            className={styles.addButton}
+            onClick={() => dispatch(addToCart(product))}
+          />
           <NavLink to={`/product/${id}`} className={styles.showButton}>
             Show more
           </NavLink>

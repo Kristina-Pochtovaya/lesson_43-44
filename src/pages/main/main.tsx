@@ -1,39 +1,39 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Card } from '../../components/card/card';
-import { selectProducts, setProducts } from '../../store/slices/productsSlice';
-import { Products } from '../../types/product';
+import { selectProducts } from '../../store/slices/productsSlice';
 import styles from './main.module.scss';
 import { useEffect } from 'react';
+import { getProducts } from '../../store/thunks/products';
+import { useAppDispatch } from '../../store/store';
+import { ProductType } from '../../types/product';
 
 export function Main() {
-  const dispatch = useDispatch();
-  const cards = useSelector(selectProducts);
-
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    fetch('https://dummyjson.com/products?limit=5')
-      .then((res) => res.json())
-      .then((data: Products) => dispatch(setProducts(data.products)));
+    dispatch(getProducts());
   }, []);
+  const { isLoading, products, hasError } = useSelector(selectProducts);
+
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
+
+  if (hasError) {
+    return <div>Opps, something went wrong, please try later!</div>;
+  }
 
   return (
     <>
-      {cards.length > 0 ? (
+      {products.length > 0 ? (
         <div className={styles.base}>
           <div className={styles.contanier}>
             <div className={styles.title}>
               <p>Products List</p>
             </div>
             <ul className={styles.cards}>
-              {cards.map((card) => (
+              {products.map((card: ProductType) => (
                 <li key={card.id}>
-                  <Card
-                    id={card.id}
-                    image={card.images[0]}
-                    title={card.title}
-                    shippingInformation={card.shippingInformation}
-                    rating={card.rating}
-                    price={card.price}
-                  />
+                  <Card product={card} />
                 </li>
               ))}
             </ul>

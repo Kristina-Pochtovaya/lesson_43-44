@@ -4,27 +4,30 @@ import { useEffect, useState } from 'react';
 
 import { Review } from '../../components/review/review';
 import { Rating } from '../../components/rating/rating';
-import { ProductType } from '../../types/product';
 import { Button } from '../../components/button/button';
-import { selectProduct, setProduct } from '../../store/slices/productSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { PopUp } from '../../components/pop_up/button/pop_up';
+import { selectProduct } from '../../store/slices/productSlice';
+import { useSelector } from 'react-redux';
 import { ProductPopUp } from '../../components/product_pop_up/product_pop_up';
+import { getProduct } from '../../store/thunks/product';
+import { useAppDispatch } from '../../store/store';
 
 export function Product() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const dispatch = useDispatch();
-  const product = useSelector(selectProduct);
+  const dispatch = useAppDispatch();
+  const { product, isLoading, hasError } = useSelector(selectProduct);
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`https://dummyjson.com/products/${id}`)
-      .then((res) => res.json())
-      .then((data: ProductType) => {
-        dispatch(setProduct(data));
-      });
+    dispatch(getProduct(id));
   }, [id]);
 
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
+
+  if (hasError) {
+    return <div>Opps, something went wrong, please try later!</div>;
+  }
   return (
     <>
       {product ? (
@@ -35,7 +38,7 @@ export function Product() {
                 className={styles.image}
                 onClick={() => setIsPopupVisible(true)}
               >
-                <img src={product?.images[0]} alt="image" />
+                <img src={product.images[0]} alt="image" />
               </div>
 
               <div className={styles.mainInfo}>
