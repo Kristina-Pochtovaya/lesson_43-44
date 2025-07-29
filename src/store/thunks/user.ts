@@ -13,6 +13,6 @@ export const loginUser = createAsyncThunk(
       // @ts-ignore
       { credentials: 'include' }
     );
-    localStorage.setItem('auth', JSON.stringify(response.data.accessToken));
+    localStorage.setItem('auth', response.data.accessToken);
   }
 );
