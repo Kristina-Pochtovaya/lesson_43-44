@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux';
 import { Card } from '../../components/card/card';
 import { selectProducts } from '../../store/slices/productsSlice';
-import styles from './main.module.scss';
+import styles from './products.module.scss';
 import { useEffect } from 'react';
 import { getProducts } from '../../store/thunks/products';
 import { useAppDispatch } from '../../store/store';
 import { ProductType } from '../../types/product';
 
-export function Main() {
+export function Products() {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getProducts());

@@ -4,8 +4,6 @@ import { ProductType } from '../../types/product';
 import { RootState } from '../store';
 import { getProduct } from '../thunks/product';
 
-// const initialState: ProductType | null = null;
-
 type SliceProductType = {
   hasError: boolean;
   isLoading: boolean;

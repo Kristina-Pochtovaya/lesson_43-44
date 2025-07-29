@@ -3,12 +3,14 @@ import productReducer from './slices/productSlice';
 import productsReducer from './slices/productsSlice';
 import { useDispatch } from 'react-redux';
 import cartSlice from './slices/cartSlice';
+import userSlice from './slices/userSlice';
 
 export const store = configureStore({
   reducer: {
     cart: cartSlice,
     product: productReducer,
     products: productsReducer,
+    user: userSlice,
   },
 });
 

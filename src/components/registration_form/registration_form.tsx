@@ -1,14 +1,18 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useState } from 'react';
 
 import { GoogleIcon } from '../../icons/google_icon';
-// import { Button } from '../button/button';
 import { Input, inputTypes } from '../input/input';
 import styles from './registration_form.module.scss';
 import clsx from 'clsx';
 import { themes } from '../../common';
 import { Button } from '../button/button';
 import { RegistrationButton } from '../registration_button/registration_button';
+
+import { CredentialsType } from '../../types/user';
+import { useAppDispatch } from '../../store/store';
+import { loginUser } from '../../store/thunks/user';
+import { useNavigate } from 'react-router';
 
 export type InputValuesType = {
   name: string;
@@ -27,14 +31,20 @@ export type RegistrationFormProps = {
 };
 
 export function RegistrationForm({ theme }: RegistrationFormProps) {
+  const [loginActive, setLoginActive] = useState(true);
   const [inputValues, setInputvalues] = useState<InputValuesType>({
     name: '',
     email: '',
     password: '',
   });
 
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const handleChange = useCallback(
-    (value) => setInputvalues(value),
+    (value) => {
+      setInputvalues(value);
+    },
     [setInputvalues]
   );
 
@@ -48,12 +58,22 @@ export function RegistrationForm({ theme }: RegistrationFormProps) {
     []
   );
 
+  const handleLoginBtn = useCallback(() => {
+    const credentails: CredentialsType = {
+      username: inputValues.name,
+      password: inputValues.password,
+    };
+
+    dispatch(loginUser(credentails));
+    navigate('/products');
+  }, [inputValues.name, inputValues.password]);
+
   const memoizedInputValues = useMemo(() => inputValues, [inputValues]);
 
   return (
     <div className={styles.base}>
       <div className={clsx(styles.title, styles[`title__${theme}`])}>
-        <h3> Create an account</h3>
+        <h3> {loginActive ? 'Sign In' : ' Create an account'}</h3>
         <p>Let’s get started with your 30 days free trial</p>
       </div>
 
@@ -66,20 +86,22 @@ export function RegistrationForm({ theme }: RegistrationFormProps) {
           handleChange={handleChange}
           value={memoizedInputValues}
         />
-        <Input
-          theme={theme === themes.dark ? themes.light : themes.dark}
-          id={inputIds.email}
-          title="Email"
-          type={inputTypes.email}
-          handleChange={handleChange}
-          value={memoizedInputValues}
-        />
+        {!loginActive && (
+          <Input
+            theme={theme === themes.dark ? themes.light : themes.dark}
+            id={inputIds.email}
+            title="Email"
+            type={inputTypes.email}
+            handleChange={handleChange}
+            value={memoizedInputValues}
+          />
+        )}
         <Input
           theme={theme === themes.dark ? themes.light : themes.dark}
           id={inputIds.password}
           title="Password"
           type={inputTypes.password}
-          handleChange={setInputvalues}
+          handleChange={handleChange}
           value={memoizedInputValues}
         />
       </div>
@@ -87,8 +109,10 @@ export function RegistrationForm({ theme }: RegistrationFormProps) {
       <div className={styles.buttons}>
         <RegistrationButton
           theme={theme === themes.dark ? themes.light : themes.dark}
-          title="Create Account"
-          handleClick={handleClickCreateAccountBtn}
+          title={loginActive ? 'Sign in' : 'Create Account'}
+          handleClick={
+            loginActive ? handleLoginBtn : handleClickCreateAccountBtn
+          }
         />
         <RegistrationButton
           handleClick={handleClickSignUpBtn}
@@ -108,7 +132,11 @@ export function RegistrationForm({ theme }: RegistrationFormProps) {
 
       <div className={clsx(styles.footer, styles[`footer__${theme}`])}>
         <p>Already have an account?</p>
-        <a href="#">Sign in</a>
+        <Button
+          className={styles.button}
+          title={loginActive ? 'Sign in' : 'Register'}
+          onClick={() => setLoginActive(loginActive ? false : true)}
+        />
       </div>
     </div>
   );
