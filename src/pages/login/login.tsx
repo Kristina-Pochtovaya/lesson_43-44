@@ -1,14 +1,14 @@
 import { useState, useCallback } from 'react';
 
-import styles from './registration.module.scss';
+import styles from './login.module.scss';
 import clsx from 'clsx';
 import { ChangeThemeButton } from '../../components/change_theme_button/change_theme_button';
 
 import { Description } from '../../components/description/description';
-import { RegistrationForm } from '../../components/registration_form/registration_form';
+import { AuthForm } from '../../components/auth_form/auth_form';
 import { themes } from '../../common';
 
-export function Registration() {
+export function Login() {
   const [theme, setTheme] = useState<keyof typeof themes>(themes.dark);
 
   const handleClick = useCallback(
@@ -20,7 +20,7 @@ export function Registration() {
   return (
     <div className={clsx(styles.base, styles[`base__${theme}`])}>
       <Description />
-      <RegistrationForm theme={theme} />
+      <AuthForm theme={theme} />
       <ChangeThemeButton
         handleClick={handleClick}
         className={styles.changeThemeButton}

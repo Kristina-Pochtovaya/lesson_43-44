@@ -1,10 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './input.module.scss';
-import {
-  inputIds,
-  InputValuesType,
-} from '../registration_form/registration_form';
+import { inputIds, InputValuesType } from '../auth_form/auth_form';
 import { themes } from '../../common';
 
 export const inputTypes = {

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import JSX from 'react';
-import styles from './registration_button.module.scss';
+
+import styles from './auth_button.module.scss';
 import { themes } from '../../common';
 import React from 'react';
 
@@ -26,7 +26,7 @@ type PropsWithoutIcon = {
 
 type ButtonProps = PropsWithIcon | PropsWithoutIcon;
 
-export function RegistrationButton({
+export function AuthButton({
   title,
   handleClick,
   hasIcon = false,

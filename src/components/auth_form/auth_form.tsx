@@ -3,16 +3,18 @@ import { useState } from 'react';
 
 import { GoogleIcon } from '../../icons/google_icon';
 import { Input, inputTypes } from '../input/input';
-import styles from './registration_form.module.scss';
+import styles from './auth_form.module.scss';
 import clsx from 'clsx';
 import { themes } from '../../common';
 import { Button } from '../button/button';
-import { RegistrationButton } from '../registration_button/registration_button';
+import { AuthButton } from '../auth_button/auth_button';
 
 import { CredentialsType } from '../../types/user';
 import { useAppDispatch } from '../../store/store';
 import { loginUser } from '../../store/thunks/user';
 import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../store/slices/userSlice';
 
 export type InputValuesType = {
   name: string;
@@ -26,11 +28,11 @@ export const inputIds = {
   password: 'password',
 } as const;
 
-export type RegistrationFormProps = {
+export type AuthFormProps = {
   theme: keyof typeof themes;
 };
 
-export function RegistrationForm({ theme }: RegistrationFormProps) {
+export function AuthForm({ theme }: AuthFormProps) {
   const [loginActive, setLoginActive] = useState(true);
   const [inputValues, setInputvalues] = useState<InputValuesType>({
     name: '',
@@ -58,6 +60,13 @@ export function RegistrationForm({ theme }: RegistrationFormProps) {
     []
   );
 
+  const isAuth = useSelector(selectUser).isAuth;
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/products');
+    }
+  }, [isAuth]);
+
   const handleLoginBtn = useCallback(() => {
     const credentails: CredentialsType = {
       username: inputValues.name,
@@ -65,7 +74,6 @@ export function RegistrationForm({ theme }: RegistrationFormProps) {
     };
 
     dispatch(loginUser(credentails));
-    navigate('/products');
   }, [inputValues.name, inputValues.password]);
 
   const memoizedInputValues = useMemo(() => inputValues, [inputValues]);
@@ -107,14 +115,14 @@ export function RegistrationForm({ theme }: RegistrationFormProps) {
       </div>
 
       <div className={styles.buttons}>
-        <RegistrationButton
+        <AuthButton
           theme={theme === themes.dark ? themes.light : themes.dark}
           title={loginActive ? 'Sign in' : 'Create Account'}
           handleClick={
             loginActive ? handleLoginBtn : handleClickCreateAccountBtn
           }
         />
-        <RegistrationButton
+        <AuthButton
           handleClick={handleClickSignUpBtn}
           theme={theme === themes.dark ? themes.dark : themes.light}
           title="Sign up with Google"

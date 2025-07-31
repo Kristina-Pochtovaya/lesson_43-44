@@ -1,46 +1,50 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { loginUser } from '../thunks/user';
 
 type SliceUserType = {
-  hasError: boolean;
-  isLoading: boolean;
   isAuth: boolean;
+  firstName: string;
+  lastName: string;
+  image: string;
 };
 
 const initialState: SliceUserType = {
-  hasError: false,
-  isLoading: true,
   isAuth: false,
+  firstName: '',
+  lastName: '',
+  image: '',
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(loginUser.pending, (state, _) => {
+  reducers: {
+    setIsAuthedUser: (state, action: PayloadAction<boolean>) => {
       return {
         ...state,
-        isLoading: true,
+        isAuth: action.payload,
       };
-    });
-    builder.addCase(loginUser.fulfilled, () => {
-      return {
-        isAuth: true,
-        hasError: false,
-        isLoading: false,
-      };
-    });
-    builder.addCase(loginUser.rejected, (state, _) => {
+    },
+    setUserData: (
+      state,
+      action: PayloadAction<{
+        firstName: string;
+        lastName: string;
+        image: string;
+      }>
+    ) => {
+      const { firstName, lastName, image } = action.payload;
       return {
         ...state,
-        hasError: true,
-        isLoading: false,
+        firstName,
+        lastName,
+        image,
       };
-    });
+    },
   },
 });
+
+export const { setIsAuthedUser, setUserData } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user;
 
